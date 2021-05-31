@@ -1,30 +1,40 @@
-var fight = function(){
-    // Alert players that they are starting the round
-    window.alert("Welcome to Robot Gladiators!");
-
+//  Game States
+//"WIN" - Player robot has defeated all enemy-robots
+//    * Fight all enemy-robots
+//    * Defeat each enemy-robot
+// "LOSE" - Player robot's health is zero or less
 
 var playerName = window.prompt("What is your robot's name?");
 var playerAttack = 10;
 var playerHealth = 100; 
 var playerMoney = 10;
 
+console.log(playerName, playerAttack, playerHealth);
+
+var enemyName = ["Roborto", "Amy Android", "Robo Trumble"];
+var enemyHealth = 50;
+var enemyAttack = 12;
+console.log(enemyName);
+console.log(enemyName[0]);
+console.log(enemyName[1]);
+console.log(enemyName[2]);
+console.log(enemyName.length);
+
+for(var i = 0; i < enemyName.length; i++) {
+  console.log(enemyName[i]);
+  console.log(i);
+  console.log(enemyName[i] + " is at " + i + " index");
+}
+
+var fight = function(){
+    // Alert players that they are starting the round
+    window.alert("Welcome to Robot Gladiators!");
+
+
 var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.")
 console.log(promptFight);
 
-// check to see if the value of the palyerHealth varible is greater than 0
-if (playerHealth === 0){
-    // three equal signs allows us to check if two values are directly equal to one another.
-    console.log("Your player is alive!")
-}
-else {
-    console.log("This will run instead.");
-}
 
-    console.log(playerName, playerAttack, playerHealth);
-
-var enemyName = "Roborto";
-var enemyHealth = 50;
-var enemyAttack = 12;
 
 // if player choses to fight, then fight
 if (promptFight === "fight" || promptFight === "FIGHT"){
@@ -47,8 +57,7 @@ playerHealth = playerHealth - enemyAttack;
 
 // Log a resulting message to the console so we know that it worked.
 console.log(
-    enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
-)
+    enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining.")
 // check players health
 if (playerHealth <= 0){
     window.alert(playerName + " has died!");
@@ -79,5 +88,5 @@ else {
 
 
 
-fight();
+//fight();
 
