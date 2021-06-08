@@ -4,6 +4,8 @@ var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
+console.log(playerName, playerAttack, playerHealth);
+
 var enemyNames = ['Roborto', 'Amy Android', 'Robo Trumble'];
 var enemyHealth = 50;
 var enemyAttack = 12;
@@ -18,7 +20,7 @@ var fight = function(enemyName) {
   while (playerHealth > 0 && enemyHealth > 0) {
     // ask player if they'd like to fight or run
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
-
+    console.log(promptFight);
     // if player picks "skip" confirm and then stop the loop
     if (promptFight === "skip" || promptFight === "SKIP") {
       // confirm player wants to skip
@@ -28,17 +30,18 @@ var fight = function(enemyName) {
         if (confirmSkip) {
             window.alert(playerName + ' has decided to skip this fight. Goodbye!');
             // subtract money from playerMoney for skipping
-            playerMoney = playerMoney - 10;
+            playerMoney = Math.max(0, playerMoney - 10);
             console.log("playerMoney", playerMoney);
             break;
         }
     }
 
     // remove enemy's health by subtracting the amount set in the playerAttack variable
-    enemyHealth = enemyHealth - playerAttack;
+    var damage = randomNumber(playerAttack - 3, playerAttack);
+    enemyHealth = enemyHealth = Math.max(0, enemyHealth - playerAttack);
+    
     console.log(
-      playerName + ' attacked ' + enemyName + '. ' + enemyName + ' now has ' + enemyHealth + ' health remaining.'
-    );
+      playerName + ' attacked ' + enemyName + '. ' + enemyName + ' now has ' + enemyHealth + ' health remaining.');
 
     // check enemy's health
     if (enemyHealth <= 0) {
@@ -54,7 +57,8 @@ var fight = function(enemyName) {
     }
 
     // remove players's health by subtracting the amount set in the enemyAttack variable
-    playerHealth = playerHealth - enemyAttack;
+    var damage = randomNumber(enemyAttack - 3, enemyAttack);
+    playerHealth = Math.max(0, playerHealth - enemyAttack);
     console.log(
       enemyName + ' attacked ' + playerName + '. ' + playerName + ' now has ' + playerHealth + ' health remaining.'
     );
@@ -68,6 +72,13 @@ var fight = function(enemyName) {
       window.alert(playerName + ' still has ' + playerHealth + ' health left.');
     }
   }
+};
+
+// Random number thingy
+var randomNumber = function(){
+  var value = Math.floor(Math.random()* 21) + 40;
+
+  return value;
 };
 
 // fight each enemy-robot by looping over them and fighting them one at a time
@@ -86,8 +97,9 @@ var startGame = function(){
             var pickedEnemyName = enemyNames[i];
 
             // reset enemyHealth before starting new fight
-            enemyHealth = 50;
-
+            //picks a random number. Math.floor() to round down to the nearest whole number
+            // function to generate a random numeric value
+            enemyHealth = randomNumber();
             // use debugger to pause script from running and check what's going on at that moment in the code
             //debugger;
 
@@ -179,11 +191,7 @@ switch (shopOptionPrompt) {
       shop();
       break;
   }
-  
+
 };
-
-
-
-
 
 startGame();
